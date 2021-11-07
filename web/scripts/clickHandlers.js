@@ -43,7 +43,7 @@ function pawnClickHandler(scene, target)
 
 function colorPossibleMove(scene, coordinate)
 {
-    scene.grid[coordinate.x][coordinate.y].fillColor = 0xff0000;
+    scene.backgroundGrid[coordinate.x][coordinate.y].fillColor = 0xff0000;
 }
 
 function resetAllColors(scene)
@@ -52,7 +52,7 @@ function resetAllColors(scene)
     {
         for (let row = 0; row < 8; ++row)
         {
-            scene.grid[column][row].fillColor = (((row + column) % 2) == 0) ? 0xffffff : 0x000000;
+            scene.backgroundGrid[column][row].fillColor = (((row + column) % 2) == 0) ? 0xffffff : 0x000000;
         }
     }
 }
