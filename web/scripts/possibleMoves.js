@@ -29,7 +29,7 @@ function possibleRookMoves(scene, piece)
     return possibleRookMoves;
 }
 
-function possibleKnightMoves(piece)
+function possibleKnightMoves(scene, piece)
 {
     const currentX = piece.gridX;
     const currentY = piece.gridY;
