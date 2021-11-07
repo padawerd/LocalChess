@@ -3,9 +3,13 @@ function select(scene, coordinates)
     resetAllColors(scene);
     const x = coordinates.x;
     const y = coordinates.y;
-    scene.selectedPiece = scene.pieceGrid[x][y];
-    if (scene.selectedPiece != null)
+
+    const pieceToSelect = scene.pieceGrid[x][y];
+    if (pieceToSelect != null &&
+        isWhite(pieceToSelect) && isWhitesTurn(scene) ||
+        !isWhite(pieceToSelect) && !isWhitesTurn(scene))
     {
+        scene.selectedPiece = scene.pieceGrid[x][y];
         colorSelectedPiece(scene, coordinates);
     }
 }
@@ -34,6 +38,7 @@ function move(scene, coordinates)
         const drawingCoordinates = drawingCoordinatesForPiece(x, y);
         piece.x = drawingCoordinates.x;
         piece.y = drawingCoordinates.y;
+        ++scene.currentTurn;
     }
     scene.selectedPiece = null;
 }

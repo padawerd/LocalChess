@@ -84,3 +84,8 @@ function drawingCoordinatesForPiece(x, y)
     return {x: xOffset + xSpacing * x, 
             y: yOffset + ySpacing * y};
 }
+
+function isWhitesTurn(scene)
+{
+    return scene.currentTurn % 2 == 0;
+}
