@@ -50,14 +50,8 @@ function isEnemy(scene, piece, newCoordinate)
     return isWhite(scene.pieceGrid[newCoordinate.x][newCoordinate.y]) != isWhite(piece);
 }
 
-function filterPossibleMoves(scene, piece, candidateMoveCoordinates)
-{
-    return _.filter(candidateMoveCoordinates, possibleMove => isValidAndVacantOrEnemy(scene, piece, possibleMove));
-}
-
 function contains(possibleMoves, candidateMove)
 {
-    possibleMoves.forEach(m => console.log("x:"+m.x+"y:"+m.y));
     const filtered = _.filter(possibleMoves, (move) => move.x == candidateMove.x && move.y == candidateMove.y);
     return filtered.length > 0;
 }
@@ -88,4 +82,15 @@ function drawingCoordinatesForPiece(x, y)
 function isWhitesTurn(scene)
 {
     return scene.currentTurn % 2 == 0;
+}
+
+function resetAllColors(scene)
+{
+    for (let column = 0; column < 8; ++column)
+    {
+        for (let row = 0; row < 8; ++row)
+        {
+            scene.backgroundGrid[column][row].fillColor = (((row + column) % 2) == 0) ? 0xffffff : 0x006400;
+        }
+    }
 }

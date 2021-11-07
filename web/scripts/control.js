@@ -16,7 +16,7 @@ function select(scene, coordinates)
 
 function colorSelectedPiece(scene, coordinate)
 {
-    scene.backgroundGrid[coordinate.x][coordinate.y].fillColor = 0x00ff00;
+    scene.backgroundGrid[coordinate.x][coordinate.y].fillColor = 0x0000ff;
 }
 
 
@@ -26,15 +26,17 @@ function move(scene, coordinates)
     const x = coordinates.x;
     const y = coordinates.y;
     console.log("possibleMoves: " + piece.possibleMoves());
-    console.log("coordinates: " + coordinates);
+    console.log("coordinates: " + x + "|" + y);
     if (contains(piece.possibleMoves(), coordinates))
     {
+        const oldCoordinates = {x:piece.gridX, y:piece.gridY};
         //TODO: util class w/ is* methods?
         if (scene.pieceGrid[x][y] != null)
         {
             scene.pieceGrid[x][y].destroy();
         }
         setupPieceCoordinates(scene, x, y, piece);
+        scene.pieceGrid[oldCoordinates.x][oldCoordinates.y] = null;
         const drawingCoordinates = drawingCoordinatesForPiece(x, y);
         piece.x = drawingCoordinates.x;
         piece.y = drawingCoordinates.y;

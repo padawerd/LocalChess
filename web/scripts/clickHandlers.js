@@ -62,14 +62,3 @@ function colorPossibleMove(scene, coordinate)
 {
     scene.backgroundGrid[coordinate.x][coordinate.y].fillColor = 0xff0000;
 }
-
-function resetAllColors(scene)
-{
-    for (let column = 0; column < 8; ++column)
-    {
-        for (let row = 0; row < 8; ++row)
-        {
-            scene.backgroundGrid[column][row].fillColor = (((row + column) % 2) == 0) ? 0xffffff : 0x000000;
-        }
-    }
-}

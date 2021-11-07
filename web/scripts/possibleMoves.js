@@ -52,6 +52,8 @@ function possibleBishopMoves(scene, piece)
     const currentX = piece.gridX;
     const currentY = piece.gridY;
 
+    console.log('x:'+currentX+'y:'+currentY);
+
     let possibleBishopMoves = [];
     // positive x positive y
     for (let delta = 1; isValidAndVacantOrEnemy(scene, piece, {x: currentX + delta, y: currentY + delta}); ++delta)
@@ -76,6 +78,8 @@ function possibleBishopMoves(scene, piece)
     {
         possibleBishopMoves.push({x: currentX - delta, y: currentY - delta});
     } 
+
+    console.log("moves: " + possibleBishopMoves);
     return filterPossibleMoves(scene, piece, possibleBishopMoves);
 }
 
@@ -133,4 +137,10 @@ function possiblePawnMoves(scene, piece)
     }
 
     return filterPossibleMoves(scene, piece, possiblePawnMoves);
+}
+
+function filterPossibleMoves(scene, piece, candidateMoveCoordinates)
+{
+    candidateMoveCoordinates.forEach((m) => console.log("candidateMoveC:" + m.x + "|"+m.y));
+    return _.filter(candidateMoveCoordinates, possibleMove => isValidAndVacantOrEnemy(scene, piece, possibleMove));
 }
