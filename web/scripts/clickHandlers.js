@@ -34,6 +34,13 @@ function kingClickHandler(scene, target)
         .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
 }
 
+function pawnClickHandler(scene, target)
+{
+    resetAllColors(scene);
+    possiblePawnMoves(scene, target)
+        .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
+}
+
 function colorPossibleMove(scene, coordinate)
 {
     scene.grid[coordinate.x][coordinate.y].fillColor = 0xff0000;

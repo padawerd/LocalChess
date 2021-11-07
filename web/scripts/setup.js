@@ -62,18 +62,7 @@ function setupPieces(scene)
     setupBishops(scene);
     setupQueens(scene);
     setupKings(scene);
-    
-    for (const x in _.range(8))
-    {
-        const blackPawnCoordinates = coordinatesForPiece(x, 1);
-        scene.add.sprite(blackPawnCoordinates.x, blackPawnCoordinates.y, 'blackPawn');
-    }
-
-    for (const x in _.range(8))
-    {
-        const whitePawnCoordinates = coordinatesForPiece(x, 6);
-        scene.add.sprite(whitePawnCoordinates.x, whitePawnCoordinates.y, 'whitePawn');
-    }
+    setupPawns(scene);
 }
 
 function setupRooks(scene)
@@ -201,6 +190,29 @@ function setupKings(scene)
     whiteKing.gridY = 7;
     whiteKing.setInteractive();
     whiteKing.on('pointerup', () => kingClickHandler(scene, whiteKing));
+}
+
+function setupPawns(scene)
+{
+    for (const x in _.range(8))
+    {
+        const blackPawnCoordinates = coordinatesForPiece(x, 1);
+        const blackPawn = scene.add.sprite(blackPawnCoordinates.x, blackPawnCoordinates.y, 'blackPawn');
+        blackPawn.gridX = x;
+        blackPawn.gridY = 1;
+        blackPawn.setInteractive();
+        blackPawn.on('pointerup', () => pawnClickHandler(scene, blackPawn));
+    }
+
+    for (const x in _.range(8))
+    {
+        const whitePawnCoordinates = coordinatesForPiece(x, 6);
+        const whitePawn = scene.add.sprite(whitePawnCoordinates.x, whitePawnCoordinates.y, 'whitePawn');
+        whitePawn.gridX = x;
+        whitePawn.gridY = 6;
+        whitePawn.setInteractive();
+        whitePawn.on('pointerup', () => pawnClickHandler(scene, whitePawn));
+    }
 }
 
 function coordinatesForPiece(x, y)

@@ -102,6 +102,25 @@ function possibleKingMoves(scene, piece)
     return possibleKingMoves;
 }
 
+function possiblePawnMoves(scene, piece)
+{
+    const currentX = piece.gridX;
+    const currentY = piece.gridY;
+
+    const isWhite = piece.texture.key == "whitePawn"; // gross!
+    const hasMoved = isWhite ? currentY == 1 : currentY == 6; 
+
+    let possiblePawnMoves = [];
+    const oneMove = isWhite ? -1 : 1;
+    possiblePawnMoves.push({x: currentX, y: currentY + oneMove});
+    if (!hasMoved)
+    {
+        possiblePawnMoves.push({x: currentX, y: currentY + (oneMove * 2)});
+    }
+
+    return possiblePawnMoves;
+}
+
 function isValidCoordinate(coordinate)
 {
     return coordinate.x >= 0 &&
