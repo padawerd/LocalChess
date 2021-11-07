@@ -187,16 +187,16 @@ function setupKings(scene)
 
 function setupPawns(scene)
 {
-    for (const x in _.range(8))
+    for (let x = 0; x < 8; ++x)
     {
-        const blackPawnCoordinates = coordinatesForPiece(x, 1);
+        const blackPawnCoordinates = coordinatesForPiece(x, 4);
         const blackPawn = scene.add.sprite(blackPawnCoordinates.x, blackPawnCoordinates.y, 'blackPawn');
-        setupPieceCoordinates(scene, x, 1, blackPawn);
+        setupPieceCoordinates(scene, x, 4, blackPawn);
         blackPawn.setInteractive();
         blackPawn.on('pointerup', () => pawnClickHandler(scene, blackPawn));
     }
 
-    for (const x in _.range(8))
+    for (let x = 0; x < 8; ++x)
     {
         const whitePawnCoordinates = coordinatesForPiece(x, 6);
         const whitePawn = scene.add.sprite(whitePawnCoordinates.x, whitePawnCoordinates.y, 'whitePawn');

@@ -106,14 +106,30 @@ function possiblePawnMoves(scene, piece)
     const currentX = piece.gridX;
     const currentY = piece.gridY;
 
-    const hasMoved = isWhite ? currentY == 1 : currentY == 6; 
+    const hasMoved = isWhite(piece) ? currentY == 1 : currentY == 6; 
 
     let possiblePawnMoves = [];
-    const oneMove = isWhite(piece) ? -1 : 1;
-    possiblePawnMoves.push({x: currentX, y: currentY + oneMove});
-    if (!hasMoved && isValidAndVacantOrEnemy(scene, piece, possiblePawnMoves[0]))
+    const oneMoveY = isWhite(piece) ? -1 : 1;
+    const candidateMove = {x: currentX, y: currentY + oneMoveY};
+    if (isValidAndVacant(scene, candidateMove))
     {
-        possiblePawnMoves.push({x: currentX, y: currentY + (oneMove * 2)});
+        possiblePawnMoves.push(candidateMove);
+        const secondCandidateMove = {x: currentX, y: currentY + (oneMoveY * 2)};
+        if (!hasMoved && isValidAndVacant(scene, secondCandidateMove))
+        {
+            possiblePawnMoves.push(secondCandidateMove);
+        }
+    }
+
+    // attack diagonal left
+    if (isValidAndOccupiedAndEnemy(scene, piece, {x: candidateMove.x - 1, y: candidateMove.y}))
+    {
+        possiblePawnMoves.push({x: candidateMove.x - 1, y: candidateMove.y});
+    }
+    // attack diagonal right
+    if (isValidAndOccupiedAndEnemy(scene, piece, {x: candidateMove.x + 1, y: candidateMove.y}))
+    {
+        possiblePawnMoves.push({x: candidateMove.x + 1, y: candidateMove.y});
     }
 
     return filterPossibleMoves(scene, piece, possiblePawnMoves);
@@ -134,13 +150,39 @@ function isValidCoordinate(coordinate)
 
 function isVacantOrEnemy(scene, piece, newCoordinate)
 {
-    return scene.pieceGrid[newCoordinate.x][newCoordinate.y] == null ||
-        isWhite(scene.pieceGrid[newCoordinate.x][newCoordinate.y]) != isWhite(piece);
+    return isVacant(scene, newCoordinate) ||
+        isEnemy(scene, piece, newCoordinate);
+}
+
+function isValidAndVacant(scene, newCoordinate)
+{
+    return isValidCoordinate(newCoordinate) && isVacant(scene, newCoordinate);
+}
+
+function isVacant(scene, newCoordinate)
+{
+    return scene.pieceGrid[newCoordinate.x][newCoordinate.y] == null;
 }
 
 function isValidAndVacantOrEnemy(scene, piece, newCoordinate)
 {
     return isValidCoordinate(newCoordinate) && isVacantOrEnemy(scene, piece, newCoordinate);
+}
+
+function isValidAndOccupiedAndEnemy(scene, piece, newCoordinate)
+{
+    return isValidCoordinate(newCoordinate) && isOccupiedAndEnemy(scene, piece, newCoordinate);
+}
+
+function isOccupiedAndEnemy(scene, piece, newCoordinate)
+{
+    return scene.pieceGrid[newCoordinate.x][newCoordinate.y] != null && 
+        isEnemy(scene, piece, newCoordinate);
+}
+
+function isEnemy(scene, piece, newCoordinate)
+{
+    return isWhite(scene.pieceGrid[newCoordinate.x][newCoordinate.y]) != isWhite(piece);
 }
 
 function filterPossibleMoves(scene, piece, candidateMoveCoordinates)
