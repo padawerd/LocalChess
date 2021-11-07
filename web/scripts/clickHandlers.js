@@ -1,6 +1,18 @@
+function squareClickHandler(scene, coordinates)
+{
+    resetAllColors(scene);
+    if (scene.selectedPiece != null)
+    {
+        move(scene, coordinates);
+    } else {
+        select(scene, coordinates);
+    }
+}
+
 function rookClickHandler(scene, target)
 {
     resetAllColors(scene);
+    select(scene, target);
     possibleRookMoves(scene, target)
         .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
 }
@@ -8,6 +20,7 @@ function rookClickHandler(scene, target)
 function knightClickHandler(scene, target)
 {
     resetAllColors(scene);
+    select(scene, target);
     possibleKnightMoves(scene, target)
         .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
     
@@ -16,6 +29,7 @@ function knightClickHandler(scene, target)
 function bishopClickHandler(scene, target)
 {
     resetAllColors(scene);
+    select(scene, target);
     possibleBishopMoves(scene, target)
         .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
 }
@@ -23,6 +37,7 @@ function bishopClickHandler(scene, target)
 function queenClickHandler(scene, target)
 {
     resetAllColors(scene);
+    select(scene, target);
     possibleQueenMoves(scene, target)
         .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
 }
@@ -30,6 +45,7 @@ function queenClickHandler(scene, target)
 function kingClickHandler(scene, target)
 {
     resetAllColors(scene);
+    select(scene, target);
     possibleKingMoves(scene, target)
         .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
 }
@@ -37,6 +53,7 @@ function kingClickHandler(scene, target)
 function pawnClickHandler(scene, target)
 {
     resetAllColors(scene);
+    select(scene, target);
     possiblePawnMoves(scene, target)
         .forEach((possibleMove) => colorPossibleMove(scene, possibleMove));
 }
