@@ -74,7 +74,7 @@ function setupCoordinates(x, y, target)
     target.gridY = y;
 }
 
-function coordinatesForPiece(x, y)
+function drawingCoordinatesForPiece(x, y)
 {
     const xOffset = 50;
     const yOffset = 50;

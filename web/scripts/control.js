@@ -31,7 +31,7 @@ function move(scene, coordinates)
             scene.pieceGrid[x][y].destroy();
         }
         setupPieceCoordinates(scene, x, y, piece);
-        const drawingCoordinates = coordinatesForPiece(x, y);
+        const drawingCoordinates = drawingCoordinatesForPiece(x, y);
         piece.x = drawingCoordinates.x;
         piece.y = drawingCoordinates.y;
     }
